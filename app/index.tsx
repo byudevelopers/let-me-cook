@@ -1,15 +1,36 @@
-import { Text, View } from "react-native";
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
-export default function Index() {
+const Home = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+    <View style={styles.container}>
+        <Text style={[styles.title, {color: 'darkblue'}]}>Let... Me... COOK</Text>
+
+        {/* <Link style={styles.link} href="/about">About Page</Link>
+        <Link style={styles.link} href="/contact">Contact Page</Link> */}
     </View>
-  );
+  )
 }
+
+export default Home
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    title: {
+        fontWeight: 'bold',
+        fontSize: 28,
+    },
+    img: {
+        width: 200,
+        height: 200,
+    },
+    link: {
+        marginVertical: 10,
+        borderBottomWidth: 1,
+        
+    }
+})
