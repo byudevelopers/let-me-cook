@@ -1,3 +1,4 @@
+import { Link } from 'expo-router'
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
@@ -6,8 +7,8 @@ const Home = () => {
     <View style={styles.container}>
         <Text style={[styles.title, {color: 'darkblue'}]}>Let... Me... COOK</Text>
 
-        {/* <Link style={styles.link} href="/about">About Page</Link>
-        <Link style={styles.link} href="/contact">Contact Page</Link> */}
+        <Link style={styles.link} href="/pantry">About Page</Link>
+        <Link style={styles.link} href="/profile">Contact Page</Link>
     </View>
   )
 }
