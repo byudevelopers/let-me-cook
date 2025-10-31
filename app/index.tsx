@@ -7,8 +7,10 @@ const Home = () => {
     <View style={styles.container}>
         <Text style={[styles.title, {color: 'darkblue'}]}>Let... Me... COOK</Text>
 
-        <Link style={styles.link} href="/pantry">About Page</Link>
-        <Link style={styles.link} href="/profile">Contact Page</Link>
+        <Link style={styles.link} href="/pantry">Pantry</Link>
+        <Link style={styles.link} href="/history">History</Link>
+        <Link style={styles.link} href="/camera">Camera</Link>
+        <Link style={styles.link} href="/profile">Profile</Link>
     </View>
   )
 }
