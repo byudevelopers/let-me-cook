@@ -1,18 +1,19 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { Link } from 'expo-router';
 import React, { useRef, useState } from 'react';
-import { Dimensions, Image, NativeScrollEvent, NativeSyntheticEvent, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Dimensions, Image, KeyboardAvoidingView, NativeScrollEvent, NativeSyntheticEvent, Platform, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 const Home = () => {
     const [text, setText] = useState("");
     const scrollRef = useRef<ScrollView>(null);
-    const lastOffsetY = useRef(0);
+    const lastOffsetY = useRef(0); 
 
     // a slight nudge up or down will scroll the page that direction
     const handleSnap = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
         const offsetY = event.nativeEvent.contentOffset.y;
         const screenHeight = Dimensions.get('window').height;
       
+        
         const goingDown = offsetY > lastOffsetY.current;
         const goingUp = offsetY < lastOffsetY.current;
       
@@ -35,11 +36,13 @@ const Home = () => {
       
 
     return (
-        <View style={{flex: 1, backgroundColor: "#296968"}}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
+            keyboardVerticalOffset={40}
+            style={{flex: 1, backgroundColor: "#296968"}}>
         <ScrollView contentContainerStyle={styles.container} 
             ref={scrollRef} onScrollEndDrag={handleSnap} 
             showsVerticalScrollIndicator={false}>
-                
+
             <View style={styles.header}></View>
             <Image source={require("../assets/images/cookingPlaceholder.png")} style={styles.img}></Image>
             <Text style={[styles.title, {color: 'darkblue'}]}>Let... Me... COOK</Text>
@@ -59,7 +62,7 @@ const Home = () => {
                 <Text>You Typed: {text}</Text>
             </View>
         </ScrollView>
-        </View>
+        </KeyboardAvoidingView>
     )
 }
 
@@ -94,7 +97,7 @@ const styles = StyleSheet.create({
     },
     aiBox: {
         width: "100%",
-        height: 200,
+        height: 100,
         backgroundColor: "#CCB48F",
         alignItems: "center",
     },
