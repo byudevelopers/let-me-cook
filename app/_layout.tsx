@@ -1,26 +1,23 @@
+import { GLOBAL_STYLES } from "@/theme";
 import { Tabs } from "expo-router";
 import { StyleSheet, View } from "react-native";
 
 export default function RootLayout() {
   return (
     <>
-      <View style={styles.header}></View>
+      <View style={GLOBAL_STYLES.header}></View>
       <Tabs
         screenOptions={{
           headerShown: false,
           // 🔹 Overall tab bar styling
-          tabBarStyle: {
-            backgroundColor: "#1A4848",
-            height: 80,
-          },
+          tabBarStyle: GLOBAL_STYLES.navbar,
           tabBarActiveTintColor: "white",     // active tab text/icon
           tabBarInactiveTintColor: "#c5dbdb", // lighter blue when inactive
           tabBarLabelStyle: {
             fontSize: 16,
             paddingBottom: 8,
           },
-        }}
-      >
+        }}>
         <Tabs.Screen name="profile" options={{ title: "Profile" }} />
         <Tabs.Screen name="pantry" options={{ title: "Pantry" }} />
         <Tabs.Screen name="index" options={{ title: "Home" }} />
@@ -32,14 +29,5 @@ export default function RootLayout() {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    backgroundColor: "#296968",
-    height: 70,
-    width: "100%",    
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 }, // pushes shadow downward
-    shadowOpacity: 0.6,
-    shadowRadius: 4,
-    zIndex: 10, // makes shadow visible
-  },
+
 })
