@@ -1,46 +1,13 @@
-import { LinearGradient } from 'expo-linear-gradient';
 import { Link } from 'expo-router';
-import React, { useRef, useState } from 'react';
-import { Dimensions, Image, KeyboardAvoidingView, NativeScrollEvent, NativeSyntheticEvent, Platform, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import React from 'react';
+import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 const Home = () => {
-    const [text, setText] = useState("");
-    const scrollRef = useRef<ScrollView>(null);
-    const lastOffsetY = useRef(0); 
-
-    // a slight nudge up or down will scroll the page that direction
-    const handleSnap = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-        const offsetY = event.nativeEvent.contentOffset.y;
-        const screenHeight = Dimensions.get('window').height;
-      
-        
-        const goingDown = offsetY > lastOffsetY.current;
-        const goingUp = offsetY < lastOffsetY.current;
-      
-        let snapTo = lastOffsetY.current;
-      
-        if (goingDown) {
-          snapTo = lastOffsetY.current + screenHeight;
-        } else if (goingUp) {
-          snapTo = lastOffsetY.current - screenHeight;
-        }
-      
-        // Clamp snapTo to non-negative values
-        snapTo = Math.max(0, snapTo);
-      
-        scrollRef.current?.scrollTo({ y: snapTo, animated: true });
-      
-        lastOffsetY.current = snapTo;
-      };
-      
-      
-
     return (
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
             keyboardVerticalOffset={40}
             style={{flex: 1, backgroundColor: "#296968"}}>
         <ScrollView contentContainerStyle={styles.container} 
-            ref={scrollRef} onScrollEndDrag={handleSnap} 
             showsVerticalScrollIndicator={false}>
 
             <View style={styles.header}></View>
@@ -51,16 +18,6 @@ const Home = () => {
             <Link style={styles.link} href="/history">History</Link>
             <Link style={styles.link} href="/camera">Camera</Link>
             <Link style={styles.link} href="/profile">Profile</Link>
-            
-            <LinearGradient
-                colors={['#E1AA57', '#CCB48F']} // top to bottom gradient
-                style={styles.gradient} />
-            <View style={styles.aiBox}>
-                <TextInput style={styles.msg} 
-                    placeholder='Type something...' 
-                    onSubmitEditing={(event) => setText(event.nativeEvent.text)} />              
-                <Text>You Typed: {text}</Text>
-            </View>
         </ScrollView>
         </KeyboardAvoidingView>
     )
@@ -85,11 +42,6 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         alignItems: 'center',
         backgroundColor: "#E1AA57",
-    },
-    gradient: {
-        width: "100%",
-        backgroundColor: "black",
-        height: 900,
     },
     title: {
         fontWeight: 'bold',
