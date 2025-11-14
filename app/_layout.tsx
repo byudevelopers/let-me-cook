@@ -1,31 +1,30 @@
-import { Stack } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { Tabs } from "expo-router";
+
 
 export default function RootLayout() {
   return (
     <>
-      <Stack>
-        <Stack.Screen name="index" options={{ title: "Home", headerShown: false}} />
-        <Stack.Screen name="profile" options={{ title: "Profile"}} />
-        <Stack.Screen name="pantry" options={{ title: "Your Pantry"}} />
-        <Stack.Screen name="history" options={{ title: "Favorite Recipes"}} />
-        <Stack.Screen name="camera" options={{ title: "Take a Picture"}} />
-      </Stack>
-      <View style={styles.footer}><Text style={styles.footerText}>Footer</Text></View>
+      <Tabs
+        screenOptions={{
+          // 🔹 Overall tab bar styling
+          tabBarStyle: {
+            backgroundColor: "#1A4848",
+            height: 80,
+          },
+          tabBarActiveTintColor: "white",     // active tab text/icon
+          tabBarInactiveTintColor: "#c5dbdb", // lighter blue when inactive
+          tabBarLabelStyle: {
+            fontSize: 16,
+            paddingBottom: 8,
+          },
+        }}
+      >
+        <Tabs.Screen name="profile" options={{ title: "Profile" }} />
+        <Tabs.Screen name="pantry" options={{ title: "Pantry" }} />
+        <Tabs.Screen name="index" options={{ title: "Home" }} />
+        <Tabs.Screen name="history" options={{ title: "Favorites" }} />
+        <Tabs.Screen name="camera" options={{ title: "Camera" }} />
+      </Tabs>
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  footer: {
-      backgroundColor: "blue",
-      height: 80,
-      flex: 0,
-      justifyContent: "center",
-  },
-  footerText: {
-    color: "white",
-    textAlign: "center",
-    fontSize: 20,
-  }
-})
