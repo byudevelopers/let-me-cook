@@ -24,7 +24,10 @@ async function start() {
 
   app.get("/test/sendIngredients", async (req, reply) => {
     const spoon = new SpoonacularAPI();
-    await spoon.getByIngredients(["flour", "butter", "sugar", "chocolate"], 2);
+    await spoon.getByIngredientsIDs(
+      ["flour", "butter", "sugar", "chocolate"],
+      2
+    );
   });
 
   // end example code
