@@ -1,12 +1,15 @@
 import { StyleSheet } from "react-native";
 
 export const COLORS = {
-  primary: "#296968",
-  primaryDark: "#1A4848",
-  accent: "#E1AA57",
-  light: "#c5dbdb",
-  white: "#ffffff",
-  black: "#000000",
+  TextBox: "#D08121",
+  MainBackground: "#E1AA57",
+  Highlight: "#FDCE42",
+  UserPrompt: "#CCB48F",
+  PromptText: "#4D4032",
+  NavBar: "#1A4848",
+  Button: "#296968", // Also header color
+  Icon: "#338281",
+  LightTeal: "#C5DBDB",
 };
 
 export const GLOBAL_STYLES = StyleSheet.create({
