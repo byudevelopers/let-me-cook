@@ -5,47 +5,56 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 
 export default function pantry() {
-  const [checked, setChecked] = useState(false);
+  const [checkedItems, setCheckedItems] = useState<{[key: string]: boolean}>({});
+
+  const toggleCheckbox = (ingredient: string) => {
+    setCheckedItems(prev => ({
+      ...prev,
+      [ingredient]: !prev[ingredient]
+    }));
+  };
+
+  const ingredients = [
+    "Milk",
+    "Butter",
+    "Cheddar Cheese",
+    "Greek Yogurt",
+    "Spinach",
+    "Tomatoes",
+    "Onions",
+    "Garlic",
+    "Bell Peppers",
+    "Carrots",
+    "Celery",
+    "Potatoes",
+    "Chicken Breast",
+    "Ground Beef",
+    "Tofu",
+    "Canned Beans",
+    "Pasta",
+    "Rice",
+    "Quinoa",
+    "Olive Oil",
+    "Soy Sauce",
+    "Peanut Butter",
+    "Jam",
+    "Bread",
+    "Tortillas",
+    "Cereal",
+    "Oats"
+  ];
+  
 
   return (
-    <View style={{ backgroundColor: "#E1AA57"}}>
-      <ScrollView contentContainerStyle={GLOBAL_STYLES.container} 
-              showsVerticalScrollIndicator={false}>
-        <ScrollView style={styles.ingredientBox}>
-          <View style={styles.ingredient}>
-              <Checkbox style={styles.checkbox} value={checked} onValueChange={setChecked}></Checkbox>
-              <Text style={styles.ingredientText}>Eggs</Text>
-          </View>
-
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Milk</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Butter</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Cheddar Cheese</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Greek Yogurt</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Spinach</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Tomatoes</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Onions</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Garlic</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Bell Peppers</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Carrots</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Celery</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Potatoes</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Chicken Breast</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Ground Beef</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Tofu</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Canned Beans</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Pasta</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Rice</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Quinoa</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Olive Oil</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Soy Sauce</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Peanut Butter</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Jam</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Bread</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Tortillas</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Cereal</Text></View>
-          <View style={styles.ingredient}><Text style={styles.ingredientText}>Oats</Text></View>
+    <View style={GLOBAL_STYLES.container}>
+        <ScrollView style={styles.ingredientBox} showsVerticalScrollIndicator={false}>
+          {ingredients.map((ingredient) => (
+            <View style={styles.ingredient} key={ingredient}> 
+              <Checkbox style={styles.checkbox} value={!!checkedItems[ingredient]} onValueChange={() => toggleCheckbox(ingredient)}></Checkbox>
+              <Text style={styles.ingredientText}>{ingredient}</Text>
+            </View>
+          ))}
         </ScrollView>
-      </ScrollView>
     </View>
   )
 }
