@@ -10,27 +10,17 @@ async function start() {
 
   app.get("/health", async () => ({ ok: true }));
 
-  // these are all just example code
-
-  app.post("/llm/giveIngredients", async (req, reply) => {
+  app.post("/giveIngredients", async (req, reply) => {
     const Input = z.object({
       ingredients: z.array(z.string()).min(1),
       topK: z.number().int().min(1).max(20).default(10),
     });
     const input = Input.parse(req.body);
-    //const recipes = await searchRecipes(input.ingredients);
-    //return reply.send({ recipes: recipes.slice(0, input.topK) });
-  });
-
-  app.get("/test/sendIngredients", async (req, reply) => {
     const spoon = new SpoonacularAPI();
-    await spoon.getByIngredientsIDs(
-      ["flour", "butter", "sugar", "chocolate"],
-      2
-    );
-  });
 
-  // end example code
+    const recipes = await spoon.getRecipesFromIngredients(input.ingredients);
+    return reply.send({ recipes: recipes.slice(0, input.topK) });
+  });
 
   app
     .listen({ port: env.PORT, host: "0.0.0.0" })
@@ -40,5 +30,13 @@ async function start() {
       process.exit(1);
     });
 }
-
-start();
+// If CLI arguments are provided, run SpoonacularAPI directly
+if (process.argv.length > 2) {
+  const ingredients = process.argv.slice(2); // node index.js ingredient1 ingredient2 ...
+  const spoon = new SpoonacularAPI();
+  spoon.getRecipesFromIngredients(ingredients, 2).then((result) => {
+    console.log("CLI result:", result);
+  });
+} else {
+  start();
+}

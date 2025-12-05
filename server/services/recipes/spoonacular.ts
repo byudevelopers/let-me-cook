@@ -13,7 +13,7 @@ export class SpoonacularAPI {
   //   ingredients
   // )
 
-  public async getByIngredientsIDs(
+  public async getRecipesFromIngredients(
     ingredients: string[],
     numRecipes: number = 10
   ): Promise<RecipeByIngredientsResponse[]> {
